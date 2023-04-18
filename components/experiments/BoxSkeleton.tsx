@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import Bars from './Bars';
 
 export default function BoxSkeleton() {
 	return (
@@ -13,6 +13,7 @@ export default function BoxSkeleton() {
 								Link
 							</Link>
 						</div>
+						<Bars />
 					</div>
 				</div>
 			</div>
