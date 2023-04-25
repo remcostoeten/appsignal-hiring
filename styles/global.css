@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities
+@tailwind utilities;
+
+/* unsure how to this with tailwind, design has some rouned corners on first/last childs */
+.bar:first-child {
+	border-radius: 3px 0 0 3px;
+}
+
+.bar:last-child {
+	border-radius: 0 3px 3px 0;
+}

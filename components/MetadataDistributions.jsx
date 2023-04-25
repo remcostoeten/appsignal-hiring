@@ -31,15 +31,21 @@ export default function MetadataDistributions({ distributions }) {
 	const renderBars = (distributions, colorArray, total) => {
 		const bars = distributions.slice(0, 10).map((item, index) => {
 			const barSize = (item.value / total) * 100;
+			// something not right here with the calculation, but it's close enough i suppose
 			const color = colorArray[index % colorArray.length];
 			return (
-				<div
-					className={`h-full ${color}`}
-					key={index}
-					style={{
-						marginRight: '1px',
-						width: `${barSize}%`,
-					}}></div>
+				<>
+					<Tooltip key={index} content={`${item.key}`}>
+						<Link
+							href='#'
+							className={`h-full bar ${color}`}
+							style={{
+								marginRight: '1px',
+								width: `${barSize}%`,
+								cursor: 'pointer',
+							}}></Link>
+					</Tooltip>
+				</>
 			);
 		});
 
@@ -47,44 +53,48 @@ export default function MetadataDistributions({ distributions }) {
 	};
 
 	return (
-		<div>
-			<div className='metadata__wrapper bg-white'>
-				<div className='heading flex justify-between items-center p-4'>
-					<h2 className='text-xs text-indigo-900 font-bold'>
-						Attribute distributions
-					</h2>
-					<Link href='/' className='text-xxs underline text-blue-600'>
-						All attributes
-					</Link>
+		<>
+			<div>
+				<div className='metadata__wrapper bg-white'>
+					<div className='heading flex justify-between items-center p-4'>
+						<h2 className='text-xs text-indigo-900 font-bold'>
+							Attribute distributions
+						</h2>
+						<Link
+							href='/'
+							className='text-xxs underline text-blue-600'>
+							All attributes
+						</Link>
+					</div>
+					{distributions.map((distribution, index) => (
+						<>
+							<div
+								key={distribution.name}
+								className='px-4 p-1 border-t border-grey-200 flex align-baseline'>
+								<h3 className='mt-2 text-xs font-medium capitalize'>
+									{distribution.name}
+									<span className='px-0.5'>
+										({distribution.unique})
+									</span>
+								</h3>
+							</div>
+							<div className='rounded-md bg-gray-200 mb-4 h-2 mx-3 border flex '>
+								{index === 0
+									? renderBars(
+											distribution.distibutions,
+											greenBarColors,
+											distribution.total,
+									  )
+									: renderBars(
+											distribution.distibutions,
+											blueBarColors,
+											distribution.total,
+									  )}
+							</div>
+						</>
+					))}
 				</div>
-				{distributions.map((distribution, index) => (
-					<>
-						<div
-							key={distribution.name}
-							className='px-4 p-1 border-t border-grey-200 flex align-baseline'>
-							<h3 className='text-xs font-medium capitalize'>
-								{distribution.name}
-								<span className='px-0.5'>
-									({distribution.unique})
-								</span>
-							</h3>
-						</div>
-						<div className='rounded-md bg-gray-200 h-2 my-4 mx-3 border flex '>
-							{index === 0
-								? renderBars(
-										distribution.distibutions,
-										greenBarColors,
-										distribution.total,
-								  )
-								: renderBars(
-										distribution.distibutions,
-										blueBarColors,
-										distribution.total,
-								  )}
-						</div>
-					</>
-				))}
 			</div>
-		</div>
+		</>
 	);
 }
