@@ -25,41 +25,51 @@ export default function MetadataDistributions({ distributions }) {
 		'bg-blue-800',
 		'bg-blue-950',
 	];
+
+	const renderBars = (distibutions, total, colorArray) => {
+		return distibutions.map((item) => (
+			<div>
+				<span
+					/*add itterator class to titrate up classname from color aray*/
+					className='mx-2  w-1'
+					style={{
+						marginRight: '1px',
+						// add width based on value
+					}}>
+					{item.value}
+					{/* add tooltip */}
+				</span>
+			</div>
+		));
+	};
+
 	return (
 		<div>
-			{/* <Tooltip content="I'm a tooltip"> */}
-			{/* <h2>Meta/data distributions</h2> */}
-			{/* </Tooltip> */}
-
 			<div className='metadata__wrapper bg-white'>
-				<div className='heading flex justify-between items-center'>
-					<h2 className='text-xs font-bold'>
+				<div className='heading flex justify-between items-center p-4'>
+					<h2 className='text-xs text-indigo-900 font-bold'>
 						Attribute distributions
 					</h2>
-					<Link
-						className='text-xxs underline text-blue-600
-'
-						href='/'>
+					<Link href='/' className='text-xxs underline text-blue-600'>
 						All attributes
 					</Link>
 				</div>
 				{distributions.map((distribution) => (
-					<div
-						key={distribution.name}
-						className='bg-white rounded-lg shadow-md'>
-						<div className='p-4'>
-							<h3 className='text-xs font-normal'>
+					<div key={distribution.name} className=''>
+						<div className='px-4 p-1 border-t border-grey-200 flex align-baseline'>
+							<h3 className='text-xs font-medium capitalize'>
 								{distribution.name}
+								<span className='px-0.5'>
+									({distribution.unique})
+								</span>
 							</h3>
-							<p className='text-gray-500 text-sm'>
-								{distribution.unique}
-							</p>
+						</div>
+						<div className='rounded-md bg-gray-200  h-2 my-4 mx-3 border flex '>
+							{renderBars(distribution.distibutions)}
 						</div>
 					</div>
 				))}
 			</div>
-
-			{/* <pre>{JSON.stringify(distributions, null, 2)}</pre> */}
 		</div>
 	);
 }
