@@ -26,21 +26,26 @@ export default function MetadataDistributions({ distributions }) {
 		'bg-blue-950',
 	];
 
-	const renderBars = (distibutions, total, colorArray) => {
-		return distibutions.map((item) => (
-			<div>
-				<span
-					/*add itterator class to titrate up classname from color aray*/
-					className='mx-2  w-1'
-					style={{
-						marginRight: '1px',
-						// add width based on value
-					}}>
-					{item.value}
-					{/* add tooltip */}
-				</span>
-			</div>
-		));
+	const renderBars = (distributions, total, colorArray) => {
+		const bars = distributions.slice(0, 10).map((item, index) => {
+			console.log(item.value);
+			const barSize = `${(item.value / 100) * 100}`;
+			return (
+				<div key={index}>
+					<div
+						className='bg-red-400 '
+						key={`${item.key}-${index}`}
+						style={{
+							marginRight: '10px',
+							width: `${barSize}%`,
+						}}>
+						{item.value}
+					</div>
+				</div>
+			);
+		});
+
+		return bars;
 	};
 
 	return (
@@ -55,8 +60,10 @@ export default function MetadataDistributions({ distributions }) {
 					</Link>
 				</div>
 				{distributions.map((distribution) => (
-					<div key={distribution.name} className=''>
-						<div className='px-4 p-1 border-t border-grey-200 flex align-baseline'>
+					<>
+						<div
+							key={distribution.name}
+							className='px-4 p-1 border-t border-grey-200 flex align-baseline'>
 							<h3 className='text-xs font-medium capitalize'>
 								{distribution.name}
 								<span className='px-0.5'>
@@ -67,7 +74,7 @@ export default function MetadataDistributions({ distributions }) {
 						<div className='rounded-md bg-gray-200  h-2 my-4 mx-3 border flex '>
 							{renderBars(distribution.distibutions)}
 						</div>
-					</div>
+					</>
 				))}
 			</div>
 		</div>
