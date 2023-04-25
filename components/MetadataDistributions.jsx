@@ -3,28 +3,29 @@ import Link from 'next/link';
 
 export default function MetadataDistributions({ distributions }) {
 	const greenBarColors = [
-		'bg-green-100',
-		'bg-green-200',
-		'bg-green-300',
-		'bg-green-400',
-		'bg-green-500',
-		'bg-green-600',
-		'bg-green-700',
-		'bg-green-800',
-		'bg-green-900',
 		'bg-green-950',
+		'bg-green-900',
+		'bg-green-800',
+		'bg-green-700',
+		'bg-green-600',
+		'bg-green-500',
+		'bg-green-400',
+		'bg-green-300',
+		'bg-green-200',
+		'bg-green-100',
 	];
 
 	const blueBarColors = [
-		'bg-blue-100',
-		'bg-blue-200',
-		'bg-blue-300',
-		'bg-blue-400',
-		'bg-blue-500',
-		'bg-blue-600',
-		'bg-blue-700',
-		'bg-blue-800',
 		'bg-blue-950',
+		'bg-blue-900',
+		'bg-blue-800',
+		'bg-blue-700',
+		'bg-blue-600',
+		'bg-blue-500',
+		'bg-blue-400',
+		'bg-blue-300',
+		'bg-blue-200',
+		'bg-blue-100',
 	];
 
 	const renderBars = (distributions, colorArray, total) => {
