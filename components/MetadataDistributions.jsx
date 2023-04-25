@@ -14,6 +14,7 @@ export default function MetadataDistributions({ distributions }) {
 		'bg-green-900',
 		'bg-green-950',
 	];
+
 	const blueBarColors = [
 		'bg-blue-100',
 		'bg-blue-200',
@@ -26,22 +27,18 @@ export default function MetadataDistributions({ distributions }) {
 		'bg-blue-950',
 	];
 
-	const renderBars = (distributions, total, colorArray) => {
+	const renderBars = (distributions, colorArray, total) => {
 		const bars = distributions.slice(0, 10).map((item, index) => {
-			console.log(item.value);
-			const barSize = `${(item.value / 100) * 100}`;
+			const barSize = (item.value / total) * 100;
+			const color = colorArray[index % colorArray.length];
 			return (
-				<div key={index}>
-					<div
-						className='bg-red-400 '
-						key={`${item.key}-${index}`}
-						style={{
-							marginRight: '10px',
-							width: `${barSize}%`,
-						}}>
-						{item.value}
-					</div>
-				</div>
+				<div
+					className={`h-full ${color}`}
+					key={index}
+					style={{
+						marginRight: '1px',
+						width: `${barSize}%`,
+					}}></div>
 			);
 		});
 
@@ -59,7 +56,7 @@ export default function MetadataDistributions({ distributions }) {
 						All attributes
 					</Link>
 				</div>
-				{distributions.map((distribution) => (
+				{distributions.map((distribution, index) => (
 					<>
 						<div
 							key={distribution.name}
@@ -71,8 +68,18 @@ export default function MetadataDistributions({ distributions }) {
 								</span>
 							</h3>
 						</div>
-						<div className='rounded-md bg-gray-200  h-2 my-4 mx-3 border flex '>
-							{renderBars(distribution.distibutions)}
+						<div className='rounded-md bg-gray-200 h-2 my-4 mx-3 border flex '>
+							{index === 0
+								? renderBars(
+										distribution.distibutions,
+										greenBarColors,
+										distribution.total,
+								  )
+								: renderBars(
+										distribution.distibutions,
+										blueBarColors,
+										distribution.total,
+								  )}
 						</div>
 					</>
 				))}
