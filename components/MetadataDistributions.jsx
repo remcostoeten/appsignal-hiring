@@ -35,7 +35,9 @@ export default function MetadataDistributions({ distributions }) {
 			const color = colorArray[index % colorArray.length];
 			return (
 				<>
-					<Tooltip key={index} content={`${item.key}`}>
+					<Tooltip
+						key={index}
+						content={`${item.key}(${item.value}%)`}>
 						<Link
 							href='#'
 							className={`h-full bar ${color}`}
