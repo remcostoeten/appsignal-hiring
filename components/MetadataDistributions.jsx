@@ -1,5 +1,5 @@
-import Tooltip from '@/components/Tooltip';
 import Link from 'next/link';
+import Tooltip from '@/components/Tooltip';
 
 export default function MetadataDistributions({ distributions }) {
 	const greenBarColors = [
