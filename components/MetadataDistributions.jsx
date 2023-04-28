@@ -30,8 +30,7 @@ export default function MetadataDistributions({ distributions }) {
 
 	const renderBars = (distributions, colorArray, total) => {
 		const bars = distributions.slice(0, 10).map((item, index) => {
-			const barSize = (item.value / total) * 100;
-			// something not right here with the calculation, but it's close enough i suppose
+			const barSize = total !== 0 ? (item.value / total) * 100 : 0;
 			const color = colorArray[index % colorArray.length];
 			return (
 				<>
@@ -39,6 +38,7 @@ export default function MetadataDistributions({ distributions }) {
 						key={index}
 						content={`${item.key}(${item.value}%)`}>
 						<Link
+							role='bar'
 							href='#'
 							className={`h-full bar ${color}`}
 							style={{
@@ -53,6 +53,7 @@ export default function MetadataDistributions({ distributions }) {
 
 		return bars;
 	};
+
 
 	return (
 		<>

@@ -28,7 +28,7 @@ describe('MetadataDistributions component', () => {
 		expect(screen.getByText('hostname')).toBeInTheDocument();
 	});
 
-	// v2 
+	// v2
 	// A more cleaner approach but the problem here is that it will pass regardless of typos coming from the data,  but it will fail if the data is not present in the graphql query. It's a tradeoff which can be discussed based on the amount of data/components that are going to be tested.
 	const distributions = dataFromGraphql.app.metadataDistributions;
 
@@ -38,5 +38,13 @@ describe('MetadataDistributions component', () => {
 
 			expect(screen.getByText(distribution.name)).toBeInTheDocument();
 		});
+	});
+
+	it('Check if there are no more than 10 bars rendered.', () => {
+		render(<MetadataDistributions distributions={distributions} />);
+		const barElements = screen.getAllByRole('bar');
+		expect(barElements.length).toBeLessThanOrEqual(20);
+		//  20 because we slice 0,10 bars from the data and there are two distributions in the data.
+		// Althrough when typing this out this is not foolprooof obviously since one dist can have 11 bars and the other 9. But it's a start. Should maybe somehow check on the unique parent and then childs instead of the role='bar'.
 	});
 });
