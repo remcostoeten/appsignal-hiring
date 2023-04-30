@@ -34,3 +34,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .vscode/extensions.json
+
+# Local Netlify folder
+.netlify
