@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import Tooltip from '@/components/Tooltip';
 
@@ -106,10 +107,8 @@ export default function MetadataDistributions({ distributions }) {
 						</Link>
 					</div>
 					{distributions.map((distribution, index) => (
-						<>
-							<div
-								key={distribution.name}
-								className='px-4 p-1 border-t border-grey-200 flex align-baseline'>
+						<React.Fragment key={distribution.name}>
+							<div className='px-4 p-1 border-t border-grey-200 flex align-baseline'>
 								<h3 className='mt-2 text-xs font-medium capitalize'>
 									{distribution.name}
 									<span className='px-0.5'>
@@ -130,7 +129,7 @@ export default function MetadataDistributions({ distributions }) {
 											distribution.total,
 									  )}
 							</div>
-						</>
+						</React.Fragment>
 					))}
 				</div>
 			</div>
